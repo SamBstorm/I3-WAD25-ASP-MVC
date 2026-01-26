@@ -1,0 +1,33 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    var autor = new
+    {
+        firstname = "Samuel",
+        lastname = "Legrain"
+    };
+
+    List<string> categories = ["News", "International", "À la une"];
+    
+}
+<h1>Blog</h1>
+<h2>Article</h2>
+<h4>Catégories</h4>
+@if(categories.Count <= 0)
+{
+    <p>Il n'y a pas de catégorie...</p>
+}
+else
+{
+    <ul>
+        @foreach (string item in categories)
+        {
+            <li>@item</li>
+        }
+    </ul>
+}
+<p>écrit par @(autor.firstname + " " + autor.lastname)</p>
+<p>le @DateTime.Now.ToString("dd/MM/yyyy")</p>
+@*Commentaire invisible pour les utilisateurs*@
+<!--Commentaire visible pour les utilisateurs-->
