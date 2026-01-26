@@ -30,6 +30,7 @@ namespace Demo_ASP_MVC_01
                 pattern: "blog/{*article}",
                 defaults: new { Controller = "blog", Action = "index"}
                 );
+
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
