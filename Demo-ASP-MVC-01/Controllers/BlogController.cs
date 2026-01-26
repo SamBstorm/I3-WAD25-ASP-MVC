@@ -24,6 +24,7 @@ namespace Demo_ASP_MVC_01.Controllers
         {
             _logger.Log(LogLevel.Warning, "Exécution de l'action Index");
             _logger.Log(LogLevel.Error, $"Choix de l'article : {article}");
+            ViewData["article"] = article;
             return View();
         }
     }

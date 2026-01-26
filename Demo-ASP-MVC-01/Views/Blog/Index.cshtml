@@ -12,7 +12,7 @@
     
 }
 <h1>Blog</h1>
-<h2>Article</h2>
+<h2>@(ViewData.ContainsKey("article") ? ViewData["article"] : "Pas de titre")</h2>
 <h4>Catégories</h4>
 @if(categories.Count <= 0)
 {

@@ -1,0 +1,25 @@
+﻿@using Demo_ASP_MVC_01.Models.Demo
+@model Demo02ViewModel
+
+<h1>@Model.Title</h1>
+<img src="@Model.PictureURL" />
+<select>
+    @foreach(string opt in Model.UserOptions)
+    {
+        <option>@opt</option>
+    }
+</select>
+
+<table>
+    <tbody>
+        @for (int row = 0; row < Model.NbRow; row++)
+        {
+            <tr>
+                @for (int col = 0; col < Model.NbCol; col++)
+                {
+                    <td style=" width : 32px; height: 32px; background-color : @(((row + col) %2 == 0) ? "white" : "black")"></td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
