@@ -25,17 +25,6 @@ namespace Demo_ASP_MVC_01.Controllers
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(form.Mail)) ModelState.AddModelError(nameof(form.Mail), "Votre Email ne peut être null, vide ou composé d'espace blanc.");
-                if (!Regex.IsMatch(form.Mail, "^[a-zA-Z0-9\\-\\.=+*$]+@[a-zA-Z0-9\\-\\.=+*$]+$")) ModelState.AddModelError(nameof(form.Mail), "Votre Email ne n'est pas au bon format.");
-                if (form.Pwd.Length < 8 || form.Pwd.Length > 64) ModelState.AddModelError(nameof(form.Pwd), "Le mot de passe doit être compris entre 8 à 64 caractères.");
-                //if (!Regex.IsMatch(form.Pwd, "[a-z]")) ModelState.AddModelError(nameof(form.Pwd), "Le mot de passe doit avoir au minimum un caractère minuscule.");
-                //if (!Regex.IsMatch(form.Pwd, "[A-Z]")) ModelState.AddModelError(nameof(form.Pwd), "Le mot de passe doit avoir au minimum un caractère majuscule.");
-                //if (!Regex.IsMatch(form.Pwd, "[0-9]")) ModelState.AddModelError(nameof(form.Pwd), "Le mot de passe doit avoir au minimum un caractère numérique.");
-                //if (!Regex.IsMatch(form.Pwd, @"[\-=\.@\\/$#]")) ModelState.AddModelError(nameof(form.Pwd), "Le mot de passe doit avoir au minimum un caractère de type symbole.");
-                ModelState.ContainsLowerCharacterValidator(nameof(form.Pwd), form.Pwd);
-                ModelState.ContainsUpperCharacterValidator(nameof(form.Pwd), form.Pwd);
-                ModelState.ContainsNumberValidator(nameof(form.Pwd), form.Pwd);
-                ModelState.ContainsSymbolCharacterValidator(nameof(form.Pwd), form.Pwd);
                 if (!ModelState.IsValid)
                 {
                     throw new InvalidOperationException("Le model state n'est pas valide.");
