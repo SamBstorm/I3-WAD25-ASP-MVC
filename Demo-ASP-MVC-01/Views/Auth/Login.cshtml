@@ -1,11 +1,41 @@
-﻿<form method="post">
+﻿@using Microsoft.AspNetCore.Mvc.ModelBinding
+@if (TempData.ContainsKey("message"))
+{
+    <div class="alert @TempData["alert-type"]">
+        <p>@TempData["message"]</p>
+    </div>
+}
+
+@if (!ViewContext.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        <p>Le formulaire n'est pas valide...</p>
+        <p>@ViewContext.ModelState.ErrorCount erreur(s) ont été trouvé.</p>
+    </div>
+}
+
+<form method="post">
     <div>
         <label for="mail">Identifiant : </label>
-        <input id="mail" type="email" name="mail" placeholder="Votre adresse e-mail" requied/>
+        <input id="mail" type="email" name="mail" placeholder="Votre adresse e-mail" required/>
+        @if (ViewContext.ModelState["Mail"]?.Errors.Count > 0)
+        {
+            @foreach (ModelError error in ViewContext.ModelState["Mail"].Errors)
+            {
+                <p style="color : darkred; font-weight: bold">@error.ErrorMessage</p>
+            }
+        }
     </div>
     <div>
         <label for="password">Mot de passe : </label>
-        <input id="password" type="password" name="pwd" placeholder="Votre mot de passe" requied />
+        <input id="password" type="password" name="pwd" placeholder="Votre mot de passe" required />
+        @if (ViewContext.ModelState["Pwd"]?.Errors.Count > 0)
+        {
+            @foreach (ModelError error in ViewContext.ModelState["Pwd"].Errors)
+            {
+                <p style="color : darkred; font-weight: bold">@error.ErrorMessage</p>
+            }
+        }
     </div>
     <div>
         <button type="submit">Se connecter</button>
