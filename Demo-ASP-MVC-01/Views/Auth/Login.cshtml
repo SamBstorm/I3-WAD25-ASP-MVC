@@ -1,4 +1,6 @@
-﻿@using Microsoft.AspNetCore.Mvc.ModelBinding
+﻿@using Demo_ASP_MVC_01.Models.Auth
+@using Microsoft.AspNetCore.Mvc.ModelBinding
+@model LoginForm
 @if (TempData.ContainsKey("message"))
 {
     <div class="alert @TempData["alert-type"]">
@@ -6,38 +8,27 @@
     </div>
 }
 
+@*  ValidationSummary est automatiquement désactivé si présence de ValidationMessageFor()
+    
 @if (!ViewContext.ModelState.IsValid)
 {
-    <div class="alert alert-danger">
-        <p>Le formulaire n'est pas valide...</p>
-        <p>@ViewContext.ModelState.ErrorCount erreur(s) ont été trouvé.</p>
-    </div>
+    Html.ValidationSummary(false, "Le formulaire n'est pas valide...", new { @class = "alert alert-danger" });
 }
 
-<form method="post">
-    <div>
-        <label for="mail">Identifiant : </label>
-        <input id="mail" type="email" name="mail" placeholder="Votre adresse e-mail" required/>
-        @if (ViewContext.ModelState["Mail"]?.Errors.Count > 0)
-        {
-            @foreach (ModelError error in ViewContext.ModelState["Mail"].Errors)
-            {
-                <p style="color : darkred; font-weight: bold">@error.ErrorMessage</p>
-            }
-        }
+*@
+
+@using (Html.BeginForm(FormMethod.Post, new { @class= "col-6 container"})){
+    <div class="mb-3">
+        @Html.LabelFor(m => m.Mail, new { @class= "form-label"})
+        @Html.EditorFor(m => m.Mail, new { htmlAttributes = new { @class = "form-control", placeholder = "Votre adresse e-mail" } })
+        @Html.ValidationMessageFor(m => m.Mail, null, new { @class = "text-danger" })
     </div>
-    <div>
-        <label for="password">Mot de passe : </label>
-        <input id="password" type="password" name="pwd" placeholder="Votre mot de passe" required />
-        @if (ViewContext.ModelState["Pwd"]?.Errors.Count > 0)
-        {
-            @foreach (ModelError error in ViewContext.ModelState["Pwd"].Errors)
-            {
-                <p style="color : darkred; font-weight: bold">@error.ErrorMessage</p>
-            }
-        }
+    <div class="mb-3">
+        @Html.LabelFor(m => m.Pwd, new { @class = "form-label" })
+        @Html.EditorFor(m => m.Pwd, new { htmlAttributes = new { @class = "form-control", placeholder = "Votre mot de passe" } })
+        @Html.ValidationMessageFor(m => m.Pwd, null, new { @class = "text-danger" })
     </div>
-    <div>
-        <button type="submit">Se connecter</button>
+    <div class="btn-group">
+        <button class="btn btn-outline-success" type="submit">Se connecter</button>
     </div>
-</form>
+}

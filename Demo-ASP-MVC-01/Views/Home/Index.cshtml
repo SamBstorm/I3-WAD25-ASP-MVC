@@ -1,7 +1,10 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
-}
+    string text = "<p>Mon joli text</p><script>alert('Malveillant 👿!!!')</script>";
 
+}
+@Html.ActionLink("Se connecter","Login","Auth", null, new { @class= "btn btn-success", title="Cliquez pour vous connecter" })
+@Html.Raw(text.Replace("<script>", "<span>").Replace("</script>", "</span>"))
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
