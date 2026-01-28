@@ -1,0 +1,42 @@
+﻿@model LoginForm
+
+@{
+    Layout = "_LayoutNoNav";
+}
+
+@if (TempData.ContainsKey("message"))
+{
+    <div class="alert @TempData["alert-type"]">
+        <p>@TempData["message"]</p>
+    </div>
+}
+
+@*
+@if (!ViewContext.ModelState.IsValid)
+{
+    <div asp-validation-summary="All" class="alert alert-danger">
+        <p>Le formulaire n'est pas valide</p>
+    </div>  
+}
+*@
+
+@section CSS{
+    <link rel="stylesheet" href="~/css/LoginFormStyle.css"/>
+}
+
+<form method="post" class="col-6 container">
+    <div class="mb-3">
+        <label asp-for="Mail" class="form-label"></label>
+        <input asp-for="Mail" class="form-control" placeholder="Votre adresse e-mail" />
+        <span asp-validation-for="Mail" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Pwd" class="form-label"></label>
+        <input asp-for="Pwd" class="form-control" placeholder="Votre mot de passe" />
+        <span asp-validation-for="Pwd" class="text-danger"></span>
+    </div>
+    <div class="btn-group">
+        <button class="btn btn-outline-success" type="submit">Se connecter</button>
+    </div>
+</form>
+

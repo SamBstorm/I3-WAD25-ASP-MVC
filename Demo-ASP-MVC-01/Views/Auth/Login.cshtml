@@ -1,35 +1,36 @@
-﻿@using Demo_ASP_MVC_01.Models.Auth
-@using Microsoft.AspNetCore.Mvc.ModelBinding
-@model LoginForm
-@if (TempData.ContainsKey("message"))
-{
-    <div class="alert @TempData["alert-type"]">
-        <p>@TempData["message"]</p>
-    </div>
+﻿@model Demo_ASP_MVC_01.Models.Auth.LoginForm
+
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_LayoutNoNav.cshtml";
 }
 
-@*
-@if (!ViewContext.ModelState.IsValid)
-{
-    <div asp-validation-summary="All" class="alert alert-danger">
-        <p>Le formulaire n'est pas valide</p>
-    </div>  
+<h1>Se connecter</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Login">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="mb-3">
+                <label asp-for="Mail" class="form-label"></label>
+                <input asp-for="Mail" class="form-control" />
+                <span asp-validation-for="Mail" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Pwd" class="form-label"></label>
+                <input asp-for="Pwd" class="form-control" />
+                <span asp-validation-for="Pwd" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <div class="btn-group">
+                    <input type="submit" value="Se connecter" class="btn btn-outline-primary" />
+                    <a asp-action="Index" asp-controller="Home" class="btn btn-outline-warning">Revenir à l'accueil</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
-*@
-
-<form method="post" class="col-6 container">
-    <div class="mb-3">
-        <label asp-for="Mail" class="form-label"></label>
-        <input asp-for="Mail" class="form-control" placeholder="Votre adresse e-mail" />
-        <span asp-validation-for="Mail" class="text-danger"></span>
-    </div>
-    <div class="mb-3">
-        <label asp-for="Pwd" class="form-label"></label>
-        <input asp-for="Pwd" class="form-control" placeholder="Votre mot de passe" />
-        <span asp-validation-for="Pwd" class="text-danger"></span>
-    </div>
-    <div class="btn-group">
-        <button class="btn btn-outline-success" type="submit">Se connecter</button>
-    </div>
-</form>
-
