@@ -3,7 +3,8 @@
     string text = "<p>Mon joli text</p><script>alert('Malveillant 👿!!!')</script>";
 
 }
-@Html.ActionLink("Se connecter","Login","Auth", null, new { @class= "btn btn-success", title="Cliquez pour vous connecter" })
+<a asp-action="Login" asp-controller="Auth" class="btn btn-success" title="Cliquez pour vous connecter">Se connecter</a>
+
 @Html.Raw(text.Replace("<script>", "<span>").Replace("</script>", "</span>"))
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
